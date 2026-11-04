@@ -13,8 +13,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AuthenticatedAteliersRouteImport } from './routes/_authenticated.ateliers'
+import { Route as AuthenticatedIncidentsRouteImport } from './routes/_authenticated.incidents'
 import { Route as AuthenticatedLotsRouteImport } from './routes/_authenticated.lots'
 import { Route as AuthenticatedMachinesRouteImport } from './routes/_authenticated.machines'
+import { Route as AuthenticatedMaintenancesRouteImport } from './routes/_authenticated.maintenances'
+import { Route as AuthenticatedOperateursRouteImport } from './routes/_authenticated.operateurs'
 import { Route as AuthenticatedProduitsRouteImport } from './routes/_authenticated.produits'
 
 const IndexRoute = IndexRouteImport.update({
@@ -36,6 +39,11 @@ const AuthenticatedAteliersRoute = AuthenticatedAteliersRouteImport.update({
   path: '/ateliers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedIncidentsRoute = AuthenticatedIncidentsRouteImport.update({
+  id: '/incidents',
+  path: '/incidents',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedLotsRoute = AuthenticatedLotsRouteImport.update({
   id: '/lots',
   path: '/lots',
@@ -44,6 +52,17 @@ const AuthenticatedLotsRoute = AuthenticatedLotsRouteImport.update({
 const AuthenticatedMachinesRoute = AuthenticatedMachinesRouteImport.update({
   id: '/machines',
   path: '/machines',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMaintenancesRoute =
+  AuthenticatedMaintenancesRouteImport.update({
+    id: '/maintenances',
+    path: '/maintenances',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedOperateursRoute = AuthenticatedOperateursRouteImport.update({
+  id: '/operateurs',
+  path: '/operateurs',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 const AuthenticatedProduitsRoute = AuthenticatedProduitsRouteImport.update({
@@ -56,16 +75,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/ateliers': typeof AuthenticatedAteliersRoute
+  '/incidents': typeof AuthenticatedIncidentsRoute
   '/lots': typeof AuthenticatedLotsRoute
   '/machines': typeof AuthenticatedMachinesRoute
+  '/maintenances': typeof AuthenticatedMaintenancesRoute
+  '/operateurs': typeof AuthenticatedOperateursRoute
   '/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/ateliers': typeof AuthenticatedAteliersRoute
+  '/incidents': typeof AuthenticatedIncidentsRoute
   '/lots': typeof AuthenticatedLotsRoute
   '/machines': typeof AuthenticatedMachinesRoute
+  '/maintenances': typeof AuthenticatedMaintenancesRoute
+  '/operateurs': typeof AuthenticatedOperateursRoute
   '/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRoutesById {
@@ -74,24 +99,47 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/connexion': typeof ConnexionRoute
   '/_authenticated/ateliers': typeof AuthenticatedAteliersRoute
+  '/_authenticated/incidents': typeof AuthenticatedIncidentsRoute
   '/_authenticated/lots': typeof AuthenticatedLotsRoute
   '/_authenticated/machines': typeof AuthenticatedMachinesRoute
+  '/_authenticated/maintenances': typeof AuthenticatedMaintenancesRoute
+  '/_authenticated/operateurs': typeof AuthenticatedOperateursRoute
   '/_authenticated/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/connexion' | '/ateliers' | '/lots' | '/machines' | '/produits'
+    | '/'
+    | '/connexion'
+    | '/ateliers'
+    | '/incidents'
+    | '/lots'
+    | '/machines'
+    | '/maintenances'
+    | '/operateurs'
+    | '/produits'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/connexion' | '/ateliers' | '/lots' | '/machines' | '/produits'
+  to:
+    | '/'
+    | '/connexion'
+    | '/ateliers'
+    | '/incidents'
+    | '/lots'
+    | '/machines'
+    | '/maintenances'
+    | '/operateurs'
+    | '/produits'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/connexion'
     | '/_authenticated/ateliers'
+    | '/_authenticated/incidents'
     | '/_authenticated/lots'
     | '/_authenticated/machines'
+    | '/_authenticated/maintenances'
+    | '/_authenticated/operateurs'
     | '/_authenticated/produits'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +179,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAteliersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/incidents': {
+      id: '/_authenticated/incidents'
+      path: '/incidents'
+      fullPath: '/incidents'
+      preLoaderRoute: typeof AuthenticatedIncidentsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/lots': {
       id: '/_authenticated/lots'
       path: '/lots'
@@ -145,6 +200,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMachinesRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/maintenances': {
+      id: '/_authenticated/maintenances'
+      path: '/maintenances'
+      fullPath: '/maintenances'
+      preLoaderRoute: typeof AuthenticatedMaintenancesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/operateurs': {
+      id: '/_authenticated/operateurs'
+      path: '/operateurs'
+      fullPath: '/operateurs'
+      preLoaderRoute: typeof AuthenticatedOperateursRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/produits': {
       id: '/_authenticated/produits'
       path: '/produits'
@@ -157,15 +226,21 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAteliersRoute: typeof AuthenticatedAteliersRoute
+  AuthenticatedIncidentsRoute: typeof AuthenticatedIncidentsRoute
   AuthenticatedLotsRoute: typeof AuthenticatedLotsRoute
   AuthenticatedMachinesRoute: typeof AuthenticatedMachinesRoute
+  AuthenticatedMaintenancesRoute: typeof AuthenticatedMaintenancesRoute
+  AuthenticatedOperateursRoute: typeof AuthenticatedOperateursRoute
   AuthenticatedProduitsRoute: typeof AuthenticatedProduitsRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAteliersRoute: AuthenticatedAteliersRoute,
+  AuthenticatedIncidentsRoute: AuthenticatedIncidentsRoute,
   AuthenticatedLotsRoute: AuthenticatedLotsRoute,
   AuthenticatedMachinesRoute: AuthenticatedMachinesRoute,
+  AuthenticatedMaintenancesRoute: AuthenticatedMaintenancesRoute,
+  AuthenticatedOperateursRoute: AuthenticatedOperateursRoute,
   AuthenticatedProduitsRoute: AuthenticatedProduitsRoute,
 }
 
