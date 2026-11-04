@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AuthenticatedAteliersRouteImport } from './routes/_authenticated.ateliers'
+import { Route as AuthenticatedLotsRouteImport } from './routes/_authenticated.lots'
 import { Route as AuthenticatedMachinesRouteImport } from './routes/_authenticated.machines'
 import { Route as AuthenticatedProduitsRouteImport } from './routes/_authenticated.produits'
 
@@ -35,6 +36,11 @@ const AuthenticatedAteliersRoute = AuthenticatedAteliersRouteImport.update({
   path: '/ateliers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedLotsRoute = AuthenticatedLotsRouteImport.update({
+  id: '/lots',
+  path: '/lots',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedMachinesRoute = AuthenticatedMachinesRouteImport.update({
   id: '/machines',
   path: '/machines',
@@ -50,6 +56,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/ateliers': typeof AuthenticatedAteliersRoute
+  '/lots': typeof AuthenticatedLotsRoute
   '/machines': typeof AuthenticatedMachinesRoute
   '/produits': typeof AuthenticatedProduitsRoute
 }
@@ -57,6 +64,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/ateliers': typeof AuthenticatedAteliersRoute
+  '/lots': typeof AuthenticatedLotsRoute
   '/machines': typeof AuthenticatedMachinesRoute
   '/produits': typeof AuthenticatedProduitsRoute
 }
@@ -66,20 +74,23 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/connexion': typeof ConnexionRoute
   '/_authenticated/ateliers': typeof AuthenticatedAteliersRoute
+  '/_authenticated/lots': typeof AuthenticatedLotsRoute
   '/_authenticated/machines': typeof AuthenticatedMachinesRoute
   '/_authenticated/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/connexion' | '/ateliers' | '/machines' | '/produits'
+  fullPaths:
+    '/' | '/connexion' | '/ateliers' | '/lots' | '/machines' | '/produits'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/connexion' | '/ateliers' | '/machines' | '/produits'
+  to: '/' | '/connexion' | '/ateliers' | '/lots' | '/machines' | '/produits'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/connexion'
     | '/_authenticated/ateliers'
+    | '/_authenticated/lots'
     | '/_authenticated/machines'
     | '/_authenticated/produits'
   fileRoutesById: FileRoutesById
@@ -120,6 +131,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAteliersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/lots': {
+      id: '/_authenticated/lots'
+      path: '/lots'
+      fullPath: '/lots'
+      preLoaderRoute: typeof AuthenticatedLotsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/machines': {
       id: '/_authenticated/machines'
       path: '/machines'
@@ -139,12 +157,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAteliersRoute: typeof AuthenticatedAteliersRoute
+  AuthenticatedLotsRoute: typeof AuthenticatedLotsRoute
   AuthenticatedMachinesRoute: typeof AuthenticatedMachinesRoute
   AuthenticatedProduitsRoute: typeof AuthenticatedProduitsRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAteliersRoute: AuthenticatedAteliersRoute,
+  AuthenticatedLotsRoute: AuthenticatedLotsRoute,
   AuthenticatedMachinesRoute: AuthenticatedMachinesRoute,
   AuthenticatedProduitsRoute: AuthenticatedProduitsRoute,
 }
