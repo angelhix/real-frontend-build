@@ -1,24 +1,49 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { PagePending } from "@/components/app/states";
+import { ApiError, tokenStore } from "@/lib/api/client";
+import { q } from "@/lib/api/queries";
+import { homeFor } from "@/lib/permissions";
+
+// Page d'entrée : redirige vers la connexion ou vers l'accueil du rôle.
 export const Route = createFileRoute("/")({
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "TWIN_3 · Gestion d'usine" },
+      {
+        name: "description",
+        content: "Application de gestion d'usine : ateliers, lots, incidents, maintenances et stocks.",
+      },
+      { property: "og:title", content: "TWIN_3 · Gestion d'usine" },
+      {
+        property: "og:description",
+        content: "Application de gestion d'usine : ateliers, lots, incidents, maintenances et stocks.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
+  }),
+  beforeLoad: async ({ context }) => {
+    if (!tokenStore.get()) throw redirect({ to: "/connexion" });
+    try {
+      const utilisateur = await context.queryClient.ensureQueryData(q.me);
+      throw redirect({ to: homeFor(utilisateur.role) });
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 401) {
+        tokenStore.clear();
+        throw redirect({ to: "/connexion" });
+      }
+      throw e;
+    }
+  },
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="mx-auto max-w-3xl p-8">
+      <PagePending />
     </div>
   );
 }

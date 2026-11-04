@@ -10,33 +10,193 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as ConnexionRouteImport } from './routes/connexion'
+import { Route as AuthenticatedAteliersRouteImport } from './routes/_authenticated.ateliers'
+import { Route as AuthenticatedComptesRouteImport } from './routes/_authenticated.comptes'
+import { Route as AuthenticatedFournisseursRouteImport } from './routes/_authenticated.fournisseurs'
+import { Route as AuthenticatedIncidentsRouteImport } from './routes/_authenticated.incidents'
+import { Route as AuthenticatedLotsRouteImport } from './routes/_authenticated.lots'
+import { Route as AuthenticatedMachinesRouteImport } from './routes/_authenticated.machines'
+import { Route as AuthenticatedMaintenancesRouteImport } from './routes/_authenticated.maintenances'
+import { Route as AuthenticatedOperateursRouteImport } from './routes/_authenticated.operateurs'
+import { Route as AuthenticatedPiecesRouteImport } from './routes/_authenticated.pieces'
+import { Route as AuthenticatedProduitsRouteImport } from './routes/_authenticated.produits'
+import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated.tableau-de-bord'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAteliersRoute = AuthenticatedAteliersRouteImport.update({
+  id: '/ateliers',
+  path: '/ateliers',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedComptesRoute = AuthenticatedComptesRouteImport.update({
+  id: '/comptes',
+  path: '/comptes',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedFournisseursRoute =
+  AuthenticatedFournisseursRouteImport.update({
+    id: '/fournisseurs',
+    path: '/fournisseurs',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedIncidentsRoute = AuthenticatedIncidentsRouteImport.update({
+  id: '/incidents',
+  path: '/incidents',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedLotsRoute = AuthenticatedLotsRouteImport.update({
+  id: '/lots',
+  path: '/lots',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMachinesRoute = AuthenticatedMachinesRouteImport.update({
+  id: '/machines',
+  path: '/machines',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMaintenancesRoute =
+  AuthenticatedMaintenancesRouteImport.update({
+    id: '/maintenances',
+    path: '/maintenances',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedOperateursRoute = AuthenticatedOperateursRouteImport.update({
+  id: '/operateurs',
+  path: '/operateurs',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedPiecesRoute = AuthenticatedPiecesRouteImport.update({
+  id: '/pieces',
+  path: '/pieces',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedProduitsRoute = AuthenticatedProduitsRouteImport.update({
+  id: '/produits',
+  path: '/produits',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedTableauDeBordRoute =
+  AuthenticatedTableauDeBordRouteImport.update({
+    id: '/tableau-de-bord',
+    path: '/tableau-de-bord',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
+  '/ateliers': typeof AuthenticatedAteliersRoute
+  '/comptes': typeof AuthenticatedComptesRoute
+  '/fournisseurs': typeof AuthenticatedFournisseursRoute
+  '/incidents': typeof AuthenticatedIncidentsRoute
+  '/lots': typeof AuthenticatedLotsRoute
+  '/machines': typeof AuthenticatedMachinesRoute
+  '/maintenances': typeof AuthenticatedMaintenancesRoute
+  '/operateurs': typeof AuthenticatedOperateursRoute
+  '/pieces': typeof AuthenticatedPiecesRoute
+  '/produits': typeof AuthenticatedProduitsRoute
+  '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
+  '/ateliers': typeof AuthenticatedAteliersRoute
+  '/comptes': typeof AuthenticatedComptesRoute
+  '/fournisseurs': typeof AuthenticatedFournisseursRoute
+  '/incidents': typeof AuthenticatedIncidentsRoute
+  '/lots': typeof AuthenticatedLotsRoute
+  '/machines': typeof AuthenticatedMachinesRoute
+  '/maintenances': typeof AuthenticatedMaintenancesRoute
+  '/operateurs': typeof AuthenticatedOperateursRoute
+  '/pieces': typeof AuthenticatedPiecesRoute
+  '/produits': typeof AuthenticatedProduitsRoute
+  '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/connexion': typeof ConnexionRoute
+  '/_authenticated/ateliers': typeof AuthenticatedAteliersRoute
+  '/_authenticated/comptes': typeof AuthenticatedComptesRoute
+  '/_authenticated/fournisseurs': typeof AuthenticatedFournisseursRoute
+  '/_authenticated/incidents': typeof AuthenticatedIncidentsRoute
+  '/_authenticated/lots': typeof AuthenticatedLotsRoute
+  '/_authenticated/machines': typeof AuthenticatedMachinesRoute
+  '/_authenticated/maintenances': typeof AuthenticatedMaintenancesRoute
+  '/_authenticated/operateurs': typeof AuthenticatedOperateursRoute
+  '/_authenticated/pieces': typeof AuthenticatedPiecesRoute
+  '/_authenticated/produits': typeof AuthenticatedProduitsRoute
+  '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/connexion'
+    | '/ateliers'
+    | '/comptes'
+    | '/fournisseurs'
+    | '/incidents'
+    | '/lots'
+    | '/machines'
+    | '/maintenances'
+    | '/operateurs'
+    | '/pieces'
+    | '/produits'
+    | '/tableau-de-bord'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/connexion'
+    | '/ateliers'
+    | '/comptes'
+    | '/fournisseurs'
+    | '/incidents'
+    | '/lots'
+    | '/machines'
+    | '/maintenances'
+    | '/operateurs'
+    | '/pieces'
+    | '/produits'
+    | '/tableau-de-bord'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/connexion'
+    | '/_authenticated/ateliers'
+    | '/_authenticated/comptes'
+    | '/_authenticated/fournisseurs'
+    | '/_authenticated/incidents'
+    | '/_authenticated/lots'
+    | '/_authenticated/machines'
+    | '/_authenticated/maintenances'
+    | '/_authenticated/operateurs'
+    | '/_authenticated/pieces'
+    | '/_authenticated/produits'
+    | '/_authenticated/tableau-de-bord'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  ConnexionRoute: typeof ConnexionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +208,136 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/ateliers': {
+      id: '/_authenticated/ateliers'
+      path: '/ateliers'
+      fullPath: '/ateliers'
+      preLoaderRoute: typeof AuthenticatedAteliersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/comptes': {
+      id: '/_authenticated/comptes'
+      path: '/comptes'
+      fullPath: '/comptes'
+      preLoaderRoute: typeof AuthenticatedComptesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/fournisseurs': {
+      id: '/_authenticated/fournisseurs'
+      path: '/fournisseurs'
+      fullPath: '/fournisseurs'
+      preLoaderRoute: typeof AuthenticatedFournisseursRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/incidents': {
+      id: '/_authenticated/incidents'
+      path: '/incidents'
+      fullPath: '/incidents'
+      preLoaderRoute: typeof AuthenticatedIncidentsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/lots': {
+      id: '/_authenticated/lots'
+      path: '/lots'
+      fullPath: '/lots'
+      preLoaderRoute: typeof AuthenticatedLotsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/machines': {
+      id: '/_authenticated/machines'
+      path: '/machines'
+      fullPath: '/machines'
+      preLoaderRoute: typeof AuthenticatedMachinesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/maintenances': {
+      id: '/_authenticated/maintenances'
+      path: '/maintenances'
+      fullPath: '/maintenances'
+      preLoaderRoute: typeof AuthenticatedMaintenancesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/operateurs': {
+      id: '/_authenticated/operateurs'
+      path: '/operateurs'
+      fullPath: '/operateurs'
+      preLoaderRoute: typeof AuthenticatedOperateursRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/pieces': {
+      id: '/_authenticated/pieces'
+      path: '/pieces'
+      fullPath: '/pieces'
+      preLoaderRoute: typeof AuthenticatedPiecesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/produits': {
+      id: '/_authenticated/produits'
+      path: '/produits'
+      fullPath: '/produits'
+      preLoaderRoute: typeof AuthenticatedProduitsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tableau-de-bord': {
+      id: '/_authenticated/tableau-de-bord'
+      path: '/tableau-de-bord'
+      fullPath: '/tableau-de-bord'
+      preLoaderRoute: typeof AuthenticatedTableauDeBordRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedAteliersRoute: typeof AuthenticatedAteliersRoute
+  AuthenticatedComptesRoute: typeof AuthenticatedComptesRoute
+  AuthenticatedFournisseursRoute: typeof AuthenticatedFournisseursRoute
+  AuthenticatedIncidentsRoute: typeof AuthenticatedIncidentsRoute
+  AuthenticatedLotsRoute: typeof AuthenticatedLotsRoute
+  AuthenticatedMachinesRoute: typeof AuthenticatedMachinesRoute
+  AuthenticatedMaintenancesRoute: typeof AuthenticatedMaintenancesRoute
+  AuthenticatedOperateursRoute: typeof AuthenticatedOperateursRoute
+  AuthenticatedPiecesRoute: typeof AuthenticatedPiecesRoute
+  AuthenticatedProduitsRoute: typeof AuthenticatedProduitsRoute
+  AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedAteliersRoute: AuthenticatedAteliersRoute,
+  AuthenticatedComptesRoute: AuthenticatedComptesRoute,
+  AuthenticatedFournisseursRoute: AuthenticatedFournisseursRoute,
+  AuthenticatedIncidentsRoute: AuthenticatedIncidentsRoute,
+  AuthenticatedLotsRoute: AuthenticatedLotsRoute,
+  AuthenticatedMachinesRoute: AuthenticatedMachinesRoute,
+  AuthenticatedMaintenancesRoute: AuthenticatedMaintenancesRoute,
+  AuthenticatedOperateursRoute: AuthenticatedOperateursRoute,
+  AuthenticatedPiecesRoute: AuthenticatedPiecesRoute,
+  AuthenticatedProduitsRoute: AuthenticatedProduitsRoute,
+  AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  ConnexionRoute: ConnexionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
