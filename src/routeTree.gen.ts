@@ -13,11 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AuthenticatedAteliersRouteImport } from './routes/_authenticated.ateliers'
+import { Route as AuthenticatedComptesRouteImport } from './routes/_authenticated.comptes'
+import { Route as AuthenticatedFournisseursRouteImport } from './routes/_authenticated.fournisseurs'
 import { Route as AuthenticatedIncidentsRouteImport } from './routes/_authenticated.incidents'
 import { Route as AuthenticatedLotsRouteImport } from './routes/_authenticated.lots'
 import { Route as AuthenticatedMachinesRouteImport } from './routes/_authenticated.machines'
 import { Route as AuthenticatedMaintenancesRouteImport } from './routes/_authenticated.maintenances'
 import { Route as AuthenticatedOperateursRouteImport } from './routes/_authenticated.operateurs'
+import { Route as AuthenticatedPiecesRouteImport } from './routes/_authenticated.pieces'
 import { Route as AuthenticatedProduitsRouteImport } from './routes/_authenticated.produits'
 
 const IndexRoute = IndexRouteImport.update({
@@ -39,6 +42,17 @@ const AuthenticatedAteliersRoute = AuthenticatedAteliersRouteImport.update({
   path: '/ateliers',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedComptesRoute = AuthenticatedComptesRouteImport.update({
+  id: '/comptes',
+  path: '/comptes',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedFournisseursRoute =
+  AuthenticatedFournisseursRouteImport.update({
+    id: '/fournisseurs',
+    path: '/fournisseurs',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedIncidentsRoute = AuthenticatedIncidentsRouteImport.update({
   id: '/incidents',
   path: '/incidents',
@@ -65,6 +79,11 @@ const AuthenticatedOperateursRoute = AuthenticatedOperateursRouteImport.update({
   path: '/operateurs',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedPiecesRoute = AuthenticatedPiecesRouteImport.update({
+  id: '/pieces',
+  path: '/pieces',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedProduitsRoute = AuthenticatedProduitsRouteImport.update({
   id: '/produits',
   path: '/produits',
@@ -75,22 +94,28 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/ateliers': typeof AuthenticatedAteliersRoute
+  '/comptes': typeof AuthenticatedComptesRoute
+  '/fournisseurs': typeof AuthenticatedFournisseursRoute
   '/incidents': typeof AuthenticatedIncidentsRoute
   '/lots': typeof AuthenticatedLotsRoute
   '/machines': typeof AuthenticatedMachinesRoute
   '/maintenances': typeof AuthenticatedMaintenancesRoute
   '/operateurs': typeof AuthenticatedOperateursRoute
+  '/pieces': typeof AuthenticatedPiecesRoute
   '/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connexion': typeof ConnexionRoute
   '/ateliers': typeof AuthenticatedAteliersRoute
+  '/comptes': typeof AuthenticatedComptesRoute
+  '/fournisseurs': typeof AuthenticatedFournisseursRoute
   '/incidents': typeof AuthenticatedIncidentsRoute
   '/lots': typeof AuthenticatedLotsRoute
   '/machines': typeof AuthenticatedMachinesRoute
   '/maintenances': typeof AuthenticatedMaintenancesRoute
   '/operateurs': typeof AuthenticatedOperateursRoute
+  '/pieces': typeof AuthenticatedPiecesRoute
   '/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRoutesById {
@@ -99,11 +124,14 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/connexion': typeof ConnexionRoute
   '/_authenticated/ateliers': typeof AuthenticatedAteliersRoute
+  '/_authenticated/comptes': typeof AuthenticatedComptesRoute
+  '/_authenticated/fournisseurs': typeof AuthenticatedFournisseursRoute
   '/_authenticated/incidents': typeof AuthenticatedIncidentsRoute
   '/_authenticated/lots': typeof AuthenticatedLotsRoute
   '/_authenticated/machines': typeof AuthenticatedMachinesRoute
   '/_authenticated/maintenances': typeof AuthenticatedMaintenancesRoute
   '/_authenticated/operateurs': typeof AuthenticatedOperateursRoute
+  '/_authenticated/pieces': typeof AuthenticatedPiecesRoute
   '/_authenticated/produits': typeof AuthenticatedProduitsRoute
 }
 export interface FileRouteTypes {
@@ -112,22 +140,28 @@ export interface FileRouteTypes {
     | '/'
     | '/connexion'
     | '/ateliers'
+    | '/comptes'
+    | '/fournisseurs'
     | '/incidents'
     | '/lots'
     | '/machines'
     | '/maintenances'
     | '/operateurs'
+    | '/pieces'
     | '/produits'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/connexion'
     | '/ateliers'
+    | '/comptes'
+    | '/fournisseurs'
     | '/incidents'
     | '/lots'
     | '/machines'
     | '/maintenances'
     | '/operateurs'
+    | '/pieces'
     | '/produits'
   id:
     | '__root__'
@@ -135,11 +169,14 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/connexion'
     | '/_authenticated/ateliers'
+    | '/_authenticated/comptes'
+    | '/_authenticated/fournisseurs'
     | '/_authenticated/incidents'
     | '/_authenticated/lots'
     | '/_authenticated/machines'
     | '/_authenticated/maintenances'
     | '/_authenticated/operateurs'
+    | '/_authenticated/pieces'
     | '/_authenticated/produits'
   fileRoutesById: FileRoutesById
 }
@@ -179,6 +216,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAteliersRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/comptes': {
+      id: '/_authenticated/comptes'
+      path: '/comptes'
+      fullPath: '/comptes'
+      preLoaderRoute: typeof AuthenticatedComptesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/fournisseurs': {
+      id: '/_authenticated/fournisseurs'
+      path: '/fournisseurs'
+      fullPath: '/fournisseurs'
+      preLoaderRoute: typeof AuthenticatedFournisseursRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/incidents': {
       id: '/_authenticated/incidents'
       path: '/incidents'
@@ -214,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOperateursRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/pieces': {
+      id: '/_authenticated/pieces'
+      path: '/pieces'
+      fullPath: '/pieces'
+      preLoaderRoute: typeof AuthenticatedPiecesRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/produits': {
       id: '/_authenticated/produits'
       path: '/produits'
@@ -226,21 +284,27 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedAteliersRoute: typeof AuthenticatedAteliersRoute
+  AuthenticatedComptesRoute: typeof AuthenticatedComptesRoute
+  AuthenticatedFournisseursRoute: typeof AuthenticatedFournisseursRoute
   AuthenticatedIncidentsRoute: typeof AuthenticatedIncidentsRoute
   AuthenticatedLotsRoute: typeof AuthenticatedLotsRoute
   AuthenticatedMachinesRoute: typeof AuthenticatedMachinesRoute
   AuthenticatedMaintenancesRoute: typeof AuthenticatedMaintenancesRoute
   AuthenticatedOperateursRoute: typeof AuthenticatedOperateursRoute
+  AuthenticatedPiecesRoute: typeof AuthenticatedPiecesRoute
   AuthenticatedProduitsRoute: typeof AuthenticatedProduitsRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedAteliersRoute: AuthenticatedAteliersRoute,
+  AuthenticatedComptesRoute: AuthenticatedComptesRoute,
+  AuthenticatedFournisseursRoute: AuthenticatedFournisseursRoute,
   AuthenticatedIncidentsRoute: AuthenticatedIncidentsRoute,
   AuthenticatedLotsRoute: AuthenticatedLotsRoute,
   AuthenticatedMachinesRoute: AuthenticatedMachinesRoute,
   AuthenticatedMaintenancesRoute: AuthenticatedMaintenancesRoute,
   AuthenticatedOperateursRoute: AuthenticatedOperateursRoute,
+  AuthenticatedPiecesRoute: AuthenticatedPiecesRoute,
   AuthenticatedProduitsRoute: AuthenticatedProduitsRoute,
 }
 

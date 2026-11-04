@@ -36,7 +36,7 @@ export const Route = createFileRoute("/_authenticated/pieces")({
   component: PiecesPage,
 });
 
-export function StockBadge({ qte }: { qte: number }) {
+function StockBadge({ qte }: { qte: number }) {
   if (qte <= 0) return <Badge variant="destructive">Rupture</Badge>;
   if (qte <= SEUIL_STOCK_BAS)
     return <Badge className="border-transparent bg-warning text-warning-foreground hover:bg-warning">Stock bas</Badge>;
