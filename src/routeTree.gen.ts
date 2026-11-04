@@ -22,6 +22,7 @@ import { Route as AuthenticatedMaintenancesRouteImport } from './routes/_authent
 import { Route as AuthenticatedOperateursRouteImport } from './routes/_authenticated.operateurs'
 import { Route as AuthenticatedPiecesRouteImport } from './routes/_authenticated.pieces'
 import { Route as AuthenticatedProduitsRouteImport } from './routes/_authenticated.produits'
+import { Route as AuthenticatedTableauDeBordRouteImport } from './routes/_authenticated.tableau-de-bord'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -89,6 +90,12 @@ const AuthenticatedProduitsRoute = AuthenticatedProduitsRouteImport.update({
   path: '/produits',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedTableauDeBordRoute =
+  AuthenticatedTableauDeBordRouteImport.update({
+    id: '/tableau-de-bord',
+    path: '/tableau-de-bord',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/operateurs': typeof AuthenticatedOperateursRoute
   '/pieces': typeof AuthenticatedPiecesRoute
   '/produits': typeof AuthenticatedProduitsRoute
+  '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -117,6 +125,7 @@ export interface FileRoutesByTo {
   '/operateurs': typeof AuthenticatedOperateursRoute
   '/pieces': typeof AuthenticatedPiecesRoute
   '/produits': typeof AuthenticatedProduitsRoute
+  '/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -133,6 +142,7 @@ export interface FileRoutesById {
   '/_authenticated/operateurs': typeof AuthenticatedOperateursRoute
   '/_authenticated/pieces': typeof AuthenticatedPiecesRoute
   '/_authenticated/produits': typeof AuthenticatedProduitsRoute
+  '/_authenticated/tableau-de-bord': typeof AuthenticatedTableauDeBordRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -149,6 +159,7 @@ export interface FileRouteTypes {
     | '/operateurs'
     | '/pieces'
     | '/produits'
+    | '/tableau-de-bord'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -163,6 +174,7 @@ export interface FileRouteTypes {
     | '/operateurs'
     | '/pieces'
     | '/produits'
+    | '/tableau-de-bord'
   id:
     | '__root__'
     | '/'
@@ -178,6 +190,7 @@ export interface FileRouteTypes {
     | '/_authenticated/operateurs'
     | '/_authenticated/pieces'
     | '/_authenticated/produits'
+    | '/_authenticated/tableau-de-bord'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -279,6 +292,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProduitsRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/tableau-de-bord': {
+      id: '/_authenticated/tableau-de-bord'
+      path: '/tableau-de-bord'
+      fullPath: '/tableau-de-bord'
+      preLoaderRoute: typeof AuthenticatedTableauDeBordRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
@@ -293,6 +313,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedOperateursRoute: typeof AuthenticatedOperateursRoute
   AuthenticatedPiecesRoute: typeof AuthenticatedPiecesRoute
   AuthenticatedProduitsRoute: typeof AuthenticatedProduitsRoute
+  AuthenticatedTableauDeBordRoute: typeof AuthenticatedTableauDeBordRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -306,6 +327,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedOperateursRoute: AuthenticatedOperateursRoute,
   AuthenticatedPiecesRoute: AuthenticatedPiecesRoute,
   AuthenticatedProduitsRoute: AuthenticatedProduitsRoute,
+  AuthenticatedTableauDeBordRoute: AuthenticatedTableauDeBordRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
