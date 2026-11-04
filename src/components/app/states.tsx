@@ -49,7 +49,9 @@ export function PageError({ error, reset }: ErrorComponentProps) {
                 ? "Accès refusé"
                 : "Impossible de charger cette page"}
           </h2>
-          <p className="text-sm text-muted-foreground">{error.message}</p>
+          <p className="text-sm text-muted-foreground">
+            {error instanceof Error ? error.message : "Une erreur inattendue est survenue."}
+          </p>
           {unreachable && (
             <p className="text-xs text-muted-foreground">
               Adresse de l'API configurée : <span className="font-mono">{API_URL}</span>
